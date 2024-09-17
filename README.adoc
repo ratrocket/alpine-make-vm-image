@@ -8,6 +8,12 @@ ifdef::env-github[]
 image:https://github.com/{gh-name}/workflows/CI/badge.svg["Build Status", link="https://github.com/{gh-name}/actions"]
 endif::env-github[]
 
+== Note
+
+This is my fork of alpine-make-vm-image.  In this file I'm interspersing some instructions on how to get this going on Ubuntu.  Carry on!
+
+== Resume original README
+
 This project provides a script for making customized https://alpinelinux.org/[Alpine Linux] disk images for x86_64 and aarch64 footnote:[Supported since Alpine Linux v3.19. See <<aarch64-old>>.] virtual machines.
 You can choose between BIOS mode (using https://syslinux.org/[Syslinux], only for x86_64) and UEFI mode (using Linux https://docs.kernel.org/admin-guide/efi-stub.html[EFI stub]).
 It’s quite simple (400 LoC of shell), fast (~32 seconds on GitHub Actions), requires minimum dependencies (QEMU and filesystem tools).
@@ -22,15 +28,16 @@ TIP: Don’t need VM, just wanna chroot into Alpine Linux?
 
 * Linux system with common userland (Busybox or GNU coreutils)
 * POSIX-sh compatible shell (e.g. Busybox ash, dash, Bash, ZSH)
-* `qemu-img` and `qemu-nbd` tools
+* `qemu-img` and `qemu-nbd` tools (UBUNTU: `apt-get install qemu-utils`)
 * `rsync` (needed only for `--fs-skel-dir`)
 * `sfdisk` (needed only for `--partition`, `--boot-mode UEFI` and non-x86 architectures)
-* `mdev` or `udevadm` (needed only for `--partition`, `--boot-mode UEFI` and non-x86 architectures if device hotplug doesn’t work)
+* `mdev` or `udevadm` (needed only for `--partition`, `--boot-mode UEFI` and non-x86 architectures if device hotplug doesn’t work) (UBUNTU: udevadm is installed already)
 * `e2fsprogs` (for ext4), `btrfs-progs` (for Btrfs), or `xfsprogs` (for XFS)
 * `dosfstools` (needed only for `--boot-mode UEFI` and non-x86 architectures)
 
 All dependencies except the first two are automatically installed by the script when running on Alpine Linux.
 
+UBUNTU: so the only thing you need to explicitly install (at least on a Digital Ocean droplet running Ubuntu 24.xxx) is qemu-utils.
 
 == Usage
 
